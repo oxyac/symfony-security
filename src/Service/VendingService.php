@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Gnome;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 
@@ -24,5 +25,15 @@ class VendingService
         $entityManager = $this->managerRegistry->getManager();
 
         return $entityManager->getRepository(Gnome::class)->findAll();
+    }
+
+
+    public function registerUser(User $user){
+        $repo = $this->managerRegistry->getManager();
+
+        $repo->persist($user);
+
+        $repo->flush();
+
     }
 }
