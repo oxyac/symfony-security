@@ -15,6 +15,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -104,8 +105,15 @@ class VendingController extends AbstractController
         ]);
     }
 
-    #[Route('/vending/form', name: 'task_success')]
-    public function newSecond(Request $request): Response
+//    #[Route('/admin', name: 'task_success')]
+//    public function newSecond(Request $request): Response
+//    {
+//        // creates a task object and initializes some data for this example
+//        return new Response($request);
+//    }
+
+    #[Route('/api/admin/1', name: 'asdasd')]
+    public function asdd(Request $request): Response
     {
         // creates a task object and initializes some data for this example
         return new Response($request);

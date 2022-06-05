@@ -13,15 +13,18 @@ class Village
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[ORM\OneToMany(targetEntity: Gnome::class)]
     private $id;
 
+    #[ORM\OneToMany(mappedBy: "village", targetEntity: Gnome::class)]
+    private $gnomes;
+
     #[ORM\OneToOne(targetEntity: Gnome::class)]
+    #[ORM\JoinColumn(name: "chef_id", referencedColumnName: "id")]
     private $chef;
 
     public function __construct()
     {
-        $this->chef = new ArrayCollection();
+//        $this->gnomes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -37,7 +40,7 @@ class Village
         return $this->chef;
     }
 
-    public function addChef(gnome $chef): self
+    public function addChef(Gnome $chef): self
     {
         if (!$this->chef->contains($chef)) {
             $this->chef[] = $chef;
@@ -47,7 +50,7 @@ class Village
         return $this;
     }
 
-    public function removeChef(gnome $chef): self
+    public function removeChef(Gnome $chef): self
     {
         if ($this->chef->removeElement($chef)) {
             // set the owning side to null (unless already changed)
@@ -57,5 +60,21 @@ class Village
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGnomes()
+    {
+        return $this->gnomes;
+    }
+
+    /**
+     * @param mixed $gnomes
+     */
+    public function setGnomes($gnomes): void
+    {
+        $this->gnomes = $gnomes;
     }
 }
